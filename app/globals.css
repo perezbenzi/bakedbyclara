@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    /* Prevent tap flash on mobile */
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-cream font-inter;
+  }
+}
+
+@layer utilities {
+  /* Applied via key= on the step wrapper to trigger on every step change */
+  .step-enter {
+    animation: fade-in 0.25s ease-out both;
+  }
+
+  /* Hide scrollbar while keeping scroll behaviour */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
