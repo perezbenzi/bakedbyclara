@@ -1,47 +1,57 @@
 'use client';
 
 import { useState } from 'react';
-import { OrderDetails } from '@/lib/types';
 import { config } from '@/lib/config';
 import { StepHeader } from '../StepHeader';
 
 interface OrderDetailsStepProps {
-  onContinue: (details: OrderDetails) => void;
+  name: string;
+  slot: string;
+  onNameChange: (value: string) => void;
+  onSlotChange: (value: string) => void;
+  onContinue: () => void;
   onBack: () => void;
 }
 
-export function OrderDetailsStep({ onContinue, onBack }: OrderDetailsStepProps) {
-  const [name, setName] = useState('');
-  const [slot, setSlot] = useState('');
+export function OrderDetailsStep({
+  name,
+  slot,
+  onNameChange,
+  onSlotChange,
+  onContinue,
+  onBack,
+}: OrderDetailsStepProps) {
   const [errors, setErrors] = useState({ name: false, slot: false });
 
   const handleContinue = () => {
-    const nameErr = name.trim().length === 0;
+    const trimmed = name.trim();
+    const nameErr = trimmed.length === 0;
     const slotErr = slot === '';
     setErrors({ name: nameErr, slot: slotErr });
     if (!nameErr && !slotErr) {
-      onContinue({ name: name.trim(), slot });
+      onNameChange(trimmed);
+      onContinue();
     }
   };
 
   return (
     <div className="flex flex-col min-h-screen bg-cream">
-      <StepHeader title="Tus datos" onBack={onBack} />
+      <StepHeader title="Your details" onBack={onBack} />
 
       <div className="px-4 pt-5 pb-36 flex flex-col gap-5">
         {/* Name input */}
         <div>
           <label className="font-inter text-sm font-medium text-gray-700 block mb-2">
-            Nombre completo
+            Full name
           </label>
           <input
             type="text"
             value={name}
             onChange={(e) => {
-              setName(e.target.value);
+              onNameChange(e.target.value);
               if (errors.name) setErrors((p) => ({ ...p, name: false }));
             }}
-            placeholder="Ej: María García"
+            placeholder="e.g. Jane Smith"
             className={`w-full px-4 py-3.5 rounded-xl border-2 bg-white font-inter text-gray-900 text-sm outline-none transition-colors placeholder:text-gray-300 ${
               errors.name
                 ? 'border-red-400'
@@ -50,7 +60,7 @@ export function OrderDetailsStep({ onContinue, onBack }: OrderDetailsStepProps) 
           />
           {errors.name && (
             <p className="font-inter text-red-400 text-xs mt-1.5">
-              Ingresá tu nombre completo
+              Please enter your full name
             </p>
           )}
         </div>
@@ -58,14 +68,14 @@ export function OrderDetailsStep({ onContinue, onBack }: OrderDetailsStepProps) 
         {/* Pickup slot selector */}
         <div>
           <label className="font-inter text-sm font-medium text-gray-700 block mb-2">
-            Turno de retiro
+            Pickup slot
           </label>
           <div className="flex gap-3">
             {config.availableSlots.map((s) => (
               <button
                 key={s}
                 onClick={() => {
-                  setSlot(s);
+                  onSlotChange(s);
                   if (errors.slot) setErrors((p) => ({ ...p, slot: false }));
                 }}
                 className={`flex-1 py-4 rounded-xl font-inter font-semibold text-sm border-2 transition-all active:scale-95 ${
@@ -81,7 +91,7 @@ export function OrderDetailsStep({ onContinue, onBack }: OrderDetailsStepProps) 
           </div>
           {errors.slot && (
             <p className="font-inter text-red-400 text-xs mt-1.5">
-              Elegí un turno
+              Please choose a pickup slot
             </p>
           )}
         </div>
@@ -97,13 +107,13 @@ export function OrderDetailsStep({ onContinue, onBack }: OrderDetailsStepProps) 
             </div>
             <div>
               <p className="font-inter font-semibold text-gray-900 text-sm">
-                Punto de retiro
+                Pickup location
               </p>
               <p className="font-inter text-gray-500 text-sm mt-0.5">
-                {config.address}
+                {config.pickupAddress}
               </p>
               <p className="font-inter text-gray-400 text-xs mt-1.5 leading-relaxed">
-                Coordinamos el horario exacto por WhatsApp
+                {"We'll confirm the exact time via WhatsApp"}
               </p>
             </div>
           </div>
@@ -117,7 +127,7 @@ export function OrderDetailsStep({ onContinue, onBack }: OrderDetailsStepProps) 
           className="w-full py-4 rounded-full text-white font-inter font-semibold text-sm active:scale-[0.98] transition-transform"
           style={{ backgroundColor: config.primaryColor }}
         >
-          Continuar
+          Continue
         </button>
       </div>
     </div>

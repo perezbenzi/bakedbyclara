@@ -100,9 +100,9 @@ export default function Home() {
       case 'product':
         return selectedProduct ? (
           <ProductDetailStep
+            key={selectedProduct?.id}
             product={selectedProduct}
             products={products}
-            cart={cart}
             onBack={() => setStep('menu')}
             onAddToCart={addToCart}
             onViewProduct={viewProduct}
@@ -122,10 +122,15 @@ export default function Home() {
       case 'details':
         return (
           <OrderDetailsStep
-            onContinue={(details) => {
-              setOrderDetails(details);
-              setStep('payment');
-            }}
+            name={orderDetails.name}
+            slot={orderDetails.slot}
+            onNameChange={(name) =>
+              setOrderDetails((prev) => ({ ...prev, name }))
+            }
+            onSlotChange={(slot) =>
+              setOrderDetails((prev) => ({ ...prev, slot }))
+            }
+            onContinue={() => setStep('payment')}
             onBack={() => setStep('cart')}
           />
         );

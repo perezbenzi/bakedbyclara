@@ -20,14 +20,14 @@ export function BottomNav({ activeTab, cartItemCount, onNavigate }: BottomNavPro
       <button
         onClick={() => onNavigate('menu')}
         className="flex-1 flex flex-col items-center justify-center gap-0.5 h-full active:opacity-70 transition-opacity"
-        aria-label="Inicio"
+        aria-label="Home"
       >
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={activeTab === 'menu' ? active : inactive} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
           <polyline points="9 22 9 12 15 12 15 22" />
         </svg>
         <span className="text-[10px] font-inter font-medium" style={{ color: activeTab === 'menu' ? active : inactive }}>
-          Inicio
+          Home
         </span>
       </button>
 
@@ -35,7 +35,7 @@ export function BottomNav({ activeTab, cartItemCount, onNavigate }: BottomNavPro
       <button
         onClick={() => onNavigate('cart')}
         className="flex-1 flex flex-col items-center justify-center gap-0.5 h-full active:opacity-70 transition-opacity relative"
-        aria-label="Mi pedido"
+        aria-label="My order"
       >
         <div className="relative">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={activeTab === 'cart' ? active : inactive} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -53,7 +53,7 @@ export function BottomNav({ activeTab, cartItemCount, onNavigate }: BottomNavPro
           )}
         </div>
         <span className="text-[10px] font-inter font-medium" style={{ color: activeTab === 'cart' ? active : inactive }}>
-          Mi pedido
+          My order
         </span>
       </button>
 

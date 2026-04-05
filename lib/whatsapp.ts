@@ -14,12 +14,12 @@ export function buildWhatsAppMessage(
     .join('\n');
 
   return (
-    `Hola ${config.businessName}! 🍪 Mi pedido:\n` +
+    `Hi ${config.businessName}! 🍪 My order:\n` +
     `${itemLines}\n\n` +
-    `Total: $${total.toLocaleString('es-AR')}\n` +
-    `Turno: ${details.slot}\n` +
-    `Nombre: ${details.name}\n\n` +
-    `Ya realicé la transferencia, te mando el comprobante 👇`
+    `Total: $${total.toLocaleString('en-AU')}\n` +
+    `Pickup slot: ${details.slot}\n` +
+    `Name: ${details.name}\n\n` +
+    `I've completed the transfer — sending proof below 👇`
   );
 }
 

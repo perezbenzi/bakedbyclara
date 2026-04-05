@@ -32,12 +32,12 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
         <button
           onClick={onNewOrder}
           className="flex items-center gap-2 font-inter text-sm font-medium text-gray-600 active:opacity-70 transition-opacity"
-          aria-label="Volver al menú"
+          aria-label="Back to menu"
         >
           <span className="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600">
             ←
           </span>
-          <span>Nuevo pedido</span>
+          <span>New order</span>
         </button>
       </header>
 
@@ -50,10 +50,10 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
           🎉
         </div>
         <h1 className="font-inter font-bold text-2xl text-gray-900 mb-2">
-          ¡Pedido confirmado!
+          Order confirmed!
         </h1>
         <p className="font-inter text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
-          Te abrimos WhatsApp para enviar tu comprobante y coordinar la entrega.
+          {"We've opened WhatsApp so you can send proof of payment and arrange pickup."}
         </p>
       </div>
 
@@ -61,7 +61,7 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
         {/* Order items */}
         <div className="bg-white rounded-2xl p-5 shadow-sm">
           <p className="font-inter font-semibold text-gray-900 mb-4">
-            Tu pedido
+            Your order
           </p>
           <div className="space-y-2">
             {cart.map((item) => (
@@ -76,7 +76,7 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
                   )}
                 </span>
                 <span className="font-inter font-semibold text-gray-900 text-sm">
-                  ${(item.product.price * item.quantity).toLocaleString('es-AR')}
+                  ${(item.product.price * item.quantity).toLocaleString('en-AU')}
                 </span>
               </div>
             ))}
@@ -90,7 +90,7 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
               className="font-inter font-bold text-lg"
               style={{ color: config.primaryColor }}
             >
-              ${total.toLocaleString('es-AR')}
+              ${total.toLocaleString('en-AU')}
             </span>
           </div>
         </div>
@@ -98,23 +98,23 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
         {/* Order meta */}
         <div className="bg-white rounded-2xl p-4 shadow-sm">
           <div className="flex items-center justify-between text-sm mb-3">
-            <span className="font-inter text-gray-400">Nombre</span>
+            <span className="font-inter text-gray-400">Name</span>
             <span className="font-inter font-semibold text-gray-900">
               {orderDetails.name}
             </span>
           </div>
           <div className="h-px bg-gray-100 mb-3" />
           <div className="flex items-center justify-between text-sm mb-3">
-            <span className="font-inter text-gray-400">Turno</span>
+            <span className="font-inter text-gray-400">Slot</span>
             <span className="font-inter font-semibold text-gray-900">
               {orderDetails.slot}
             </span>
           </div>
           <div className="h-px bg-gray-100 mb-3" />
           <div className="flex items-center justify-between text-sm">
-            <span className="font-inter text-gray-400">Retiro en</span>
+            <span className="font-inter text-gray-400">Pickup at</span>
             <span className="font-inter font-semibold text-gray-900 text-right max-w-[55%]">
-              {config.address}
+              {config.pickupAddress}
             </span>
           </div>
         </div>
@@ -122,7 +122,7 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
         {/* Manual WhatsApp fallback */}
         <div className="text-center pt-2">
           <p className="font-inter text-gray-400 text-xs mb-2">
-            ¿No se abrió WhatsApp automáticamente?
+            {"Didn't open WhatsApp automatically?"}
           </p>
           <a
             href={waUrl}
@@ -131,7 +131,7 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
             className="inline-flex items-center gap-2 font-inter font-semibold text-sm px-6 py-3 rounded-full text-white shadow-md active:scale-95 transition-transform"
             style={{ backgroundColor: '#25D366' }}
           >
-            <span>Abrir WhatsApp</span>
+            <span>Open WhatsApp</span>
             <span>→</span>
           </a>
         </div>

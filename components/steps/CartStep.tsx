@@ -39,13 +39,13 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
 
   return (
     <div className="flex flex-col min-h-screen bg-cream">
-      <StepHeader title="Tu pedido" onBack={onBack} />
+      <StepHeader title="Your order" onBack={onBack} />
 
       <div className="pt-4 pb-36 flex-1">
         {cart.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
             <span className="text-5xl mb-4">🛒</span>
-            <p className="font-inter text-gray-400 text-sm">Tu carrito está vacío</p>
+            <p className="font-inter text-gray-400 text-sm">Your cart is empty</p>
           </div>
         ) : (
           <>
@@ -82,7 +82,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
                         className="font-inter font-bold text-sm mt-1"
                         style={{ color: config.primaryColor }}
                       >
-                        ${lineTotal.toLocaleString('es-AR')}
+                        ${lineTotal.toLocaleString('en-AU')}
                       </p>
                     </div>
 
@@ -93,7 +93,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
                           onUpdateQty(item.product.id, item.variant, -1)
                         }
                         className="w-7 h-7 rounded-full bg-gray-100 text-gray-600 flex items-center justify-center font-bold text-base active:scale-90 transition-transform"
-                        aria-label="Reducir cantidad"
+                        aria-label="Decrease quantity"
                       >
                         −
                       </button>
@@ -106,7 +106,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
                         }
                         className="w-7 h-7 rounded-full text-white flex items-center justify-center font-bold text-base active:scale-90 transition-transform"
                         style={{ backgroundColor: config.primaryColor }}
-                        aria-label="Aumentar cantidad"
+                        aria-label="Increase quantity"
                       >
                         +
                       </button>
@@ -120,7 +120,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
             {upsellProducts.length > 0 && (
               <div className="mt-6">
                 <p className="font-inter font-semibold text-gray-900 text-sm px-4 mb-3">
-                  ¿Agregás algo más?
+                  Add something else?
                 </p>
                 <div className="flex gap-3 overflow-x-auto px-4 pb-1 scrollbar-hide">
                   {upsellProducts.map((product) => (
@@ -143,13 +143,13 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
                         </p>
                         <div className="flex items-center justify-between mt-2">
                           <span className="font-inter font-bold text-gray-900 text-xs">
-                            ${product.price.toLocaleString('es-AR')}
+                            ${product.price.toLocaleString('en-AU')}
                           </span>
                           <button
                             onClick={() => handleUpsellAdd(product)}
                             className="w-7 h-7 rounded-full text-white text-base font-bold flex items-center justify-center shadow-sm active:scale-90 transition-transform flex-shrink-0"
                             style={{ backgroundColor: config.primaryColor }}
-                            aria-label={`Agregar ${product.name}`}
+                            aria-label={`Add ${product.name}`}
                           >
                             +
                           </button>
@@ -169,7 +169,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
         <div className="flex items-center justify-between mb-3">
           <span className="font-inter text-gray-500 text-sm">Total</span>
           <span className="font-inter font-bold text-gray-900 text-xl">
-            ${total.toLocaleString('es-AR')}
+            ${total.toLocaleString('en-AU')}
           </span>
         </div>
         <button
@@ -178,7 +178,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
           className="w-full py-4 rounded-full text-white font-inter font-semibold text-sm disabled:opacity-40 active:scale-[0.98] transition-transform"
           style={{ backgroundColor: config.primaryColor }}
         >
-          Continuar
+          Continue
         </button>
       </div>
 

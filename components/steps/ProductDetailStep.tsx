@@ -2,13 +2,12 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { Product, CartItem } from '@/lib/types';
+import { Product } from '@/lib/types';
 import { config } from '@/lib/config';
 
 interface ProductDetailStepProps {
   product: Product;
   products: Product[];
-  cart: CartItem[];
   onBack: () => void;
   onAddToCart: (product: Product, variant?: string) => void;
   onViewProduct: (product: Product) => void;
@@ -17,7 +16,6 @@ interface ProductDetailStepProps {
 export function ProductDetailStep({
   product,
   products,
-  cart,
   onBack,
   onAddToCart,
   onViewProduct,
@@ -30,8 +28,6 @@ export function ProductDetailStep({
   const relatedProducts = products
     .filter((p) => p.id !== product.id)
     .slice(0, 5);
-
-  const cartCount = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleAdd = () => {
     if (product.variants.length > 0 && !selectedVariant) return;
@@ -58,7 +54,7 @@ export function ProductDetailStep({
         <button
           onClick={onBack}
           className="absolute top-4 left-4 w-9 h-9 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center text-gray-700 shadow-md active:scale-90 transition-transform"
-          aria-label="Volver"
+          aria-label="Back"
         >
           ←
         </button>
@@ -75,7 +71,7 @@ export function ProductDetailStep({
             className="font-inter font-bold text-xl flex-shrink-0 pt-0.5"
             style={{ color: config.primaryColor }}
           >
-            ${product.price.toLocaleString('es-AR')}
+            ${product.price.toLocaleString('en-AU')}
           </span>
         </div>
 
@@ -88,7 +84,7 @@ export function ProductDetailStep({
         {product.variants.length > 0 && (
           <div className="mb-6">
             <p className="font-inter font-semibold text-gray-900 text-sm mb-3">
-              Variante
+              Variant
             </p>
             <div className="flex flex-wrap gap-2">
               {product.variants.map((v) => (
@@ -113,7 +109,7 @@ export function ProductDetailStep({
         {relatedProducts.length > 0 && (
           <div className="mt-2">
             <p className="font-inter font-semibold text-gray-900 text-sm mb-3">
-              También te puede interesar
+              You may also like
             </p>
             <div className="flex gap-3 overflow-x-auto pb-1 scrollbar-hide -mx-4 px-4">
               {relatedProducts.map((p) => (
@@ -136,7 +132,7 @@ export function ProductDetailStep({
                       {p.name}
                     </p>
                     <p className="font-inter font-bold text-xs mt-1" style={{ color: config.primaryColor }}>
-                      ${p.price.toLocaleString('es-AR')}
+                      ${p.price.toLocaleString('en-AU')}
                     </p>
                   </div>
                 </button>
@@ -154,7 +150,7 @@ export function ProductDetailStep({
           className="w-full py-4 rounded-full text-white font-inter font-semibold text-sm disabled:opacity-40 active:scale-[0.98] transition-all shadow-lg"
           style={{ backgroundColor: added ? '#22C55E' : config.primaryColor }}
         >
-          {added ? '¡Agregado! ✓' : 'Agregar al carrito'}
+          {added ? 'Added! ✓' : 'Add to cart'}
         </button>
       </div>
     </div>

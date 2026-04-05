@@ -38,13 +38,13 @@ export function VariantSheet({ product, onSelect, onClose }: VariantSheetProps) 
           <button
             onClick={onClose}
             className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 text-sm active:scale-90 transition-transform"
-            aria-label="Cerrar"
+            aria-label="Close"
           >
             ✕
           </button>
         </div>
         <p className="font-inter text-gray-400 text-sm mb-5">
-          Elegí una variante para agregar al pedido
+          Choose a variant to add to your order
         </p>
 
         <div className="flex flex-col gap-3">

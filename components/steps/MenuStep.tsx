@@ -67,36 +67,49 @@ export function MenuStep({
         {isLoading || !featuredProduct ? (
           <div className="w-full h-[220px] rounded-2xl bg-gray-200 animate-pulse" />
         ) : (
-          <div className="relative w-full h-[220px] overflow-hidden rounded-2xl">
+          <div
+            role="button"
+            tabIndex={0}
+            onClick={() => onViewProduct(featuredProduct)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onViewProduct(featuredProduct);
+              }
+            }}
+            className="relative w-full h-[220px] overflow-hidden rounded-2xl cursor-pointer"
+          >
             <Image
               src={featuredProduct.image_url}
               alt={featuredProduct.name}
               fill
-              className="object-cover"
+              className="object-cover pointer-events-none"
               priority
               sizes="(max-width: 480px) calc(100vw - 32px), 448px"
             />
-            {/* Dark gradient overlay at bottom */}
-            <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/75 via-black/30 to-transparent" />
-            {/* Content overlay */}
+            <div className="absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/75 via-black/30 to-transparent pointer-events-none" />
             <div className="absolute inset-x-0 bottom-0 p-4 flex items-end justify-between gap-3">
-              <div className="flex-1 min-w-0">
+              <div className="flex-1 min-w-0 pointer-events-none">
                 <p className="font-inter text-white/70 text-xs font-medium mb-0.5 uppercase tracking-wide">
-                  Destacado
+                  Featured
                 </p>
                 <h2 className="font-inter font-bold text-white text-lg leading-tight truncate">
                   {featuredProduct.name}
                 </h2>
                 <p className="font-inter font-bold text-white text-base mt-0.5">
-                  ${featuredProduct.price.toLocaleString('es-AR')}
+                  ${featuredProduct.price.toLocaleString('en-AU')}
                 </p>
               </div>
               <button
-                onClick={() => handleAdd(featuredProduct)}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleAdd(featuredProduct);
+                }}
                 className="flex-shrink-0 px-4 py-2.5 rounded-full text-white font-inter font-semibold text-sm active:scale-95 transition-transform shadow-lg"
                 style={{ backgroundColor: config.primaryColor }}
               >
-                Agregar
+                Add
               </button>
             </div>
           </div>
@@ -105,7 +118,7 @@ export function MenuStep({
 
       {/* Section title */}
       <div className="px-4 mb-4">
-        <h2 className="font-inter font-bold text-gray-900 text-base">Nuestros productos</h2>
+        <h2 className="font-inter font-bold text-gray-900 text-base">Our products</h2>
       </div>
 
       {/* Product grid */}

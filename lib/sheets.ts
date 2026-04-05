@@ -84,18 +84,50 @@ export async function fetchProducts(): Promise<Product[]> {
     }
 
     const data = (await res.json()) as { values: string[][] };
-    const [, ...rows] = data.values; // skip header row
+    const rawRows = data.values ?? [];
+    if (rawRows.length < 2) {
+      return [];
+    }
+
+    const headerRow = rawRows[0] ?? [];
+    const headers = headerRow.map((h) => h.trim().toLowerCase());
+    const rows = rawRows.slice(1);
+
+    const colIndex = (keys: string[]): number => {
+      for (const key of keys) {
+        const i = headers.indexOf(key.toLowerCase());
+        if (i >= 0) return i;
+      }
+      return -1;
+    };
+
+    const getCell = (row: string[], keys: string[], fallbackIndex: number): string => {
+      const idx = colIndex(keys);
+      const i = idx >= 0 ? idx : fallbackIndex;
+      return row[i] ?? '';
+    };
 
     return rows
-      .map((row, index) => ({
-        id: `product-${index}`,
-        name: row[0] ?? '',
-        description: row[1] ?? '',
-        price: parseFloat(row[2] ?? '0') || 0,
-        variants: row[3] ? row[3].split('|').map((v) => v.trim()) : [],
-        image_url: row[4] ?? '',
-        active: row[5]?.toLowerCase() === 'true',
-      }))
+      .map((row, index) => {
+        const slugIdx = colIndex(['slug']);
+        const idIdx = colIndex(['id']);
+        let externalId = '';
+        if (slugIdx >= 0) externalId = (row[slugIdx] ?? '').trim();
+        if (!externalId && idIdx >= 0) externalId = (row[idIdx] ?? '').trim();
+        const id = externalId || `product-${index}`;
+
+        const variantsRaw = getCell(row, ['variants', 'variantes'], 3);
+
+        return {
+          id,
+          name: getCell(row, ['name', 'nombre'], 0),
+          description: getCell(row, ['description', 'descripcion'], 1),
+          price: parseFloat(getCell(row, ['price', 'precio'], 2)) || 0,
+          variants: variantsRaw ? variantsRaw.split('|').map((v) => v.trim()) : [],
+          image_url: getCell(row, ['image_url', 'image', 'imagen'], 4),
+          active: getCell(row, ['active', 'activo'], 5).toLowerCase() === 'true',
+        };
+      })
       .filter((p) => p.active);
   } catch (err) {
     console.error('Error fetching products:', err);

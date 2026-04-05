@@ -40,13 +40,13 @@ export function ProductCard({ product, onAdd, onView }: ProductCardProps) {
         </p>
         <div className="flex items-center justify-between mt-3">
           <span className="font-inter font-bold text-gray-900 text-sm">
-            ${product.price.toLocaleString('es-AR')}
+            ${product.price.toLocaleString('en-AU')}
           </span>
           <button
             onClick={() => onAdd(product)}
             className="w-8 h-8 rounded-full text-white text-lg font-bold flex items-center justify-center shadow-sm active:scale-90 transition-transform"
             style={{ backgroundColor: config.primaryColor }}
-            aria-label={`Agregar ${product.name}`}
+            aria-label={`Add ${product.name}`}
           >
             +
           </button>

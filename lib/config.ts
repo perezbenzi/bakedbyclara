@@ -3,11 +3,11 @@
 // adapt this template to any client. No other file needs to change.
 // ─────────────────────────────────────────────────────────────────────────────
 export const config = {
-  businessName: 'Baked by Clara',
-  tagline: 'Hecho con amor, pedido por WhatsApp',
+  businessName: "Clara's Bakehouse",
+  tagline: 'Homemade with love, delivered to your door',
   featuredProductName: null as string | null,
-  whatsappNumber: '+614W10461903',
-  address: '421 Condamine St, Balgowlah',
+  whatsappNumber: '+61410461903',
+  pickupAddress: '15 Hinterland Way, Byron Bay NSW 2481',
   bankAccount: {
     number: '01234543680',
     holder: 'J. Doe',
@@ -15,7 +15,7 @@ export const config = {
   primaryColor: '#8B4513',
   googleSheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID || 'REPLACE_WITH_SHEET_ID',
   googleApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
-  availableSlots: ['Mañana', 'Tarde'],
+  availableSlots: ['Morning (9am–12pm)', 'Afternoon (1pm–5pm)'],
 } as const;
 
 export type Config = typeof config;

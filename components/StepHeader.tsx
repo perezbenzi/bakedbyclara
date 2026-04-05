@@ -12,7 +12,7 @@ export function StepHeader({ title, onBack }: StepHeaderProps) {
         <button
           onClick={onBack}
           className="w-9 h-9 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 flex-shrink-0 active:scale-90 transition-transform"
-          aria-label="Volver"
+          aria-label="Back"
         >
           ←
         </button>

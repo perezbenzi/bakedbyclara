@@ -24,15 +24,15 @@ export function PaymentStep({
 
   return (
     <div className="flex flex-col min-h-screen bg-cream">
-      <StepHeader title="Transferencia" onBack={onBack} />
+      <StepHeader title="Bank transfer" onBack={onBack} />
 
       <div className="px-4 pt-4 pb-36 flex flex-col gap-5">
         {/* Big total */}
         <div className="text-center py-7">
-          <p className="font-inter text-gray-400 text-sm mb-2">Total a transferir</p>
+          <p className="font-inter text-gray-400 text-sm mb-2">Amount to transfer</p>
           <p className="font-inter font-bold text-gray-900 leading-none"
             style={{ fontSize: '3.5rem' }}>
-            ${total.toLocaleString('es-AR')}
+            ${total.toLocaleString('en-AU')}
           </p>
         </div>
 
@@ -41,20 +41,20 @@ export function PaymentStep({
           <div className="flex items-center gap-2 mb-4">
             <span className="text-xl">🏦</span>
             <h2 className="font-inter font-semibold text-gray-900 text-base">
-              Datos bancarios
+              Bank details
             </h2>
           </div>
 
           <div className="space-y-3">
             <div className="flex items-center justify-between">
-              <span className="font-inter text-gray-400 text-sm">Número de cuenta</span>
+              <span className="font-inter text-gray-400 text-sm">Account number</span>
               <span className="font-inter font-semibold text-gray-900 text-sm tracking-wide">
                 {config.bankAccount.number}
               </span>
             </div>
             <div className="h-px bg-gray-100" />
             <div className="flex items-center justify-between">
-              <span className="font-inter text-gray-400 text-sm">Titular</span>
+              <span className="font-inter text-gray-400 text-sm">Account holder</span>
               <span className="font-inter font-semibold text-gray-900 text-sm">
                 {config.bankAccount.holder}
               </span>
@@ -71,14 +71,14 @@ export function PaymentStep({
             className="font-inter text-sm leading-relaxed"
             style={{ color: config.primaryColor }}
           >
-            Transferí el monto exacto y luego confirmá tu pedido.
+            Transfer the exact amount, then confirm your order.
           </p>
         </div>
 
         {/* Order summary */}
         <div className="bg-white rounded-2xl p-4 shadow-sm">
           <p className="font-inter font-semibold text-gray-900 text-sm mb-3">
-            Resumen del pedido
+            Order summary
           </p>
           <div className="space-y-2">
             {cart.map((item) => (
@@ -93,7 +93,7 @@ export function PaymentStep({
                   )}
                 </span>
                 <span className="font-inter text-gray-900 text-sm font-medium">
-                  ${(item.product.price * item.quantity).toLocaleString('es-AR')}
+                  ${(item.product.price * item.quantity).toLocaleString('en-AU')}
                 </span>
               </div>
             ))}
@@ -101,10 +101,10 @@ export function PaymentStep({
           <div className="h-px bg-gray-100 my-3" />
           <div className="flex items-center justify-between">
             <span className="font-inter font-semibold text-gray-900 text-sm">
-              Para: {orderDetails.name}
+              For: {orderDetails.name}
             </span>
             <span className="font-inter text-gray-400 text-xs">
-              Turno {orderDetails.slot}
+              Slot: {orderDetails.slot}
             </span>
           </div>
         </div>
@@ -117,7 +117,7 @@ export function PaymentStep({
           className="w-full py-4 rounded-full text-white font-inter font-semibold text-sm active:scale-[0.98] transition-transform shadow-lg"
           style={{ backgroundColor: config.primaryColor }}
         >
-          Ya transferí, confirmar pedido ✓
+          {"I've paid — confirm order ✓"}
         </button>
       </div>
     </div>
