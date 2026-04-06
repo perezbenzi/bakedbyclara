@@ -65,6 +65,14 @@ const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
+function toDirectImageUrl(url: string): string {
+  const match = url.match(/\/file\/d\/([^/]+)\//);
+  if (match) {
+    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
+  }
+  return url;
+}
+
 export async function fetchProducts(): Promise<Product[]> {
   if (
     config.googleSheetId === 'REPLACE_WITH_SHEET_ID' ||
@@ -124,7 +132,7 @@ export async function fetchProducts(): Promise<Product[]> {
           description: getCell(row, ['description', 'descripcion'], 1),
           price: parseFloat(getCell(row, ['price', 'precio'], 2)) || 0,
           variants: variantsRaw ? variantsRaw.split('|').map((v) => v.trim()) : [],
-          image_url: getCell(row, ['image_url', 'image', 'imagen'], 4),
+          image_url: toDirectImageUrl(getCell(row, ['image_url', 'image', 'imagen'], 4)),
           active: getCell(row, ['active', 'activo'], 5).toLowerCase() === 'true',
         };
       })
