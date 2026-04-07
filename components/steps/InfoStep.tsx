@@ -23,23 +23,33 @@ export function InfoStep() {
 
       <div className="px-4 flex flex-col gap-4">
         {/* Pickup address */}
-        <div className="bg-white rounded-2xl p-5 shadow-sm">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="text-lg">📍</span>
-            <h2 className="font-inter font-semibold text-gray-900 text-base">Pickup location</h2>
+        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+          <iframe
+            src={`https://www.google.com/maps?q=${encodeURIComponent(config.pickupAddress)}&output=embed&zoom=13`}
+            width="100%"
+            height="180"
+            style={{ border: 0, display: 'block' }}
+            loading="lazy"
+          />
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">📍</span>
+              <h2 className="font-inter font-semibold text-gray-900 text-base">Pickup location</h2>
+            </div>
+            <p className="font-inter text-gray-500 text-sm mb-4">{config.pickupAddress}</p>
+            <a
+              href={mapsHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center py-3.5 rounded-xl text-white font-inter font-semibold text-sm shadow-sm active:scale-[0.98] transition-transform"
+              style={{ backgroundColor: config.primaryColor }}
+            >
+              Get directions
+            </a>
+            <p className="font-inter text-gray-400 text-xs mt-3 leading-relaxed">
+              {"We'll confirm the exact time via WhatsApp"}
+            </p>
           </div>
-          <a
-            href={mapsHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full inline-flex items-center justify-center py-3.5 rounded-xl text-white font-inter font-semibold text-sm shadow-sm active:scale-[0.98] transition-transform"
-            style={{ backgroundColor: config.primaryColor }}
-          >
-            View on Google Maps
-          </a>
-          <p className="font-inter text-gray-400 text-xs mt-3 leading-relaxed">
-            {"We'll confirm the exact time via WhatsApp"}
-          </p>
         </div>
 
         {/* Available slots */}

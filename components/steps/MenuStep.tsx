@@ -13,6 +13,7 @@ interface MenuStepProps {
   isLoading: boolean;
   cart: CartItem[];
   onAddToCart: (product: Product, variant?: string) => void;
+  onUpdateQty: (productId: string, variant: string | undefined, delta: number) => void;
   onViewProduct: (product: Product) => void;
 }
 
@@ -21,6 +22,7 @@ export function MenuStep({
   isLoading,
   cart,
   onAddToCart,
+  onUpdateQty,
   onViewProduct,
 }: MenuStepProps) {
   const [pendingProduct, setPendingProduct] = useState<Product | null>(null);
@@ -37,6 +39,9 @@ export function MenuStep({
     onAddToCart(product, variant);
     setPendingProduct(null);
   };
+
+  const getQty = (productId: string) =>
+    cart.filter((i) => i.product.id === productId).reduce((sum, i) => sum + i.quantity, 0);
 
   const featuredProduct = !isLoading
     ? (config.featuredProductName
@@ -100,6 +105,7 @@ export function MenuStep({
                   ${featuredProduct.price.toLocaleString('en-AU')}
                 </p>
               </div>
+
               <button
                 type="button"
                 onClick={(e) => {
@@ -125,14 +131,20 @@ export function MenuStep({
       <div className="px-4 grid grid-cols-2 gap-3 pb-20">
         {isLoading
           ? Array.from({ length: 6 }).map((_, i) => <ProductSkeleton key={i} />)
-          : products.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-                onAdd={handleAdd}
-                onView={onViewProduct}
-              />
-            ))}
+          : products.map((product) => {
+              const cartItem = cart.find((i) => i.product.id === product.id);
+              return (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  quantity={getQty(product.id)}
+                  variant={cartItem?.variant}
+                  onAdd={handleAdd}
+                  onRemove={(p, v) => onUpdateQty(p.id, v, -1)}
+                  onView={onViewProduct}
+                />
+              );
+            })}
       </div>
 
       {/* Variant bottom sheet */}

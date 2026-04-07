@@ -94,6 +94,7 @@ export default function Home() {
             isLoading={isLoading}
             cart={cart}
             onAddToCart={addToCart}
+            onUpdateQty={updateQty}
             onViewProduct={viewProduct}
           />
         );

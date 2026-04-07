@@ -6,11 +6,14 @@ import { config } from '@/lib/config';
 
 interface ProductCardProps {
   product: Product;
+  quantity: number;
+  variant?: string;
   onAdd: (product: Product) => void;
+  onRemove: (product: Product, variant?: string) => void;
   onView?: (product: Product) => void;
 }
 
-export function ProductCard({ product, onAdd, onView }: ProductCardProps) {
+export function ProductCard({ product, quantity, variant, onAdd, onRemove, onView }: ProductCardProps) {
   return (
     <div className="bg-white rounded-2xl shadow-sm overflow-hidden flex flex-col">
       {/* Clickable image area */}
@@ -42,14 +45,51 @@ export function ProductCard({ product, onAdd, onView }: ProductCardProps) {
           <span className="font-inter font-bold text-gray-900 text-sm">
             ${product.price.toLocaleString('en-AU')}
           </span>
-          <button
-            onClick={() => onAdd(product)}
-            className="w-8 h-8 rounded-full text-white text-lg font-bold flex items-center justify-center shadow-sm active:scale-90 transition-transform"
-            style={{ backgroundColor: config.primaryColor }}
-            aria-label={`Add ${product.name}`}
+
+          {/* Animated quantity pill */}
+          <div
+            className="flex items-center justify-end overflow-hidden rounded-full transition-all duration-200 ease-out shadow-sm"
+            style={{
+              backgroundColor: config.primaryColor,
+              width: quantity > 0 ? 96 : 32,
+              height: 32,
+            }}
           >
-            +
-          </button>
+            {/* Left: trash (qty=1) or − (qty>1) */}
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onRemove(product, variant); }}
+              className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-white transition-opacity duration-150"
+              style={{ opacity: quantity > 0 ? 1 : 0, pointerEvents: quantity > 0 ? 'auto' : 'none' }}
+              aria-label="Remove"
+            >
+              {quantity === 1 ? (
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6h14z" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                </svg>
+              ) : (
+                <span className="text-base font-bold leading-none">−</span>
+              )}
+            </button>
+
+            {/* Center: quantity */}
+            <span
+              className="flex-shrink-0 text-white font-inter font-bold text-sm text-center transition-opacity duration-150"
+              style={{ width: 32, opacity: quantity > 0 ? 1 : 0 }}
+            >
+              {quantity || ''}
+            </span>
+
+            {/* Right: + */}
+            <button
+              type="button"
+              onClick={(e) => { e.stopPropagation(); onAdd(product); }}
+              className="w-8 h-8 flex-shrink-0 flex items-center justify-center text-white text-lg font-bold"
+              aria-label={`Add ${product.name}`}
+            >
+              +
+            </button>
+          </div>
         </div>
       </div>
     </div>
