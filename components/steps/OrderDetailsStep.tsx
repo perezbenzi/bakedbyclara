@@ -96,26 +96,33 @@ export function OrderDetailsStep({
           )}
         </div>
 
-        {/* Pickup address (read-only) */}
-        <div className="bg-white rounded-2xl p-4 shadow-sm">
-          <div className="flex items-start gap-3">
-            <div
-              className="w-9 h-9 rounded-full flex items-center justify-center text-base flex-shrink-0 mt-0.5"
-              style={{ backgroundColor: `${config.primaryColor}20` }}
+        {/* Pickup address */}
+        <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+          <iframe
+            src={`https://www.google.com/maps?q=${encodeURIComponent(config.pickupAddress)}&output=embed&zoom=13`}
+            width="100%"
+            height="180"
+            style={{ border: 0, display: 'block' }}
+            loading="lazy"
+          />
+          <div className="p-5">
+            <div className="flex items-center gap-2 mb-1">
+              <span className="text-lg">📍</span>
+              <h2 className="font-inter font-semibold text-gray-900 text-base">Pickup location</h2>
+            </div>
+            <p className="font-inter text-gray-500 text-sm mb-4">{config.pickupAddress}</p>
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(config.pickupAddress)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full inline-flex items-center justify-center py-3.5 rounded-xl text-white font-inter font-semibold text-sm shadow-sm active:scale-[0.98] transition-transform"
+              style={{ backgroundColor: config.primaryColor }}
             >
-              📍
-            </div>
-            <div>
-              <p className="font-inter font-semibold text-gray-900 text-sm">
-                Pickup location
-              </p>
-              <p className="font-inter text-gray-500 text-sm mt-0.5">
-                {config.pickupAddress}
-              </p>
-              <p className="font-inter text-gray-400 text-xs mt-1.5 leading-relaxed">
-                {"We'll confirm the exact time via WhatsApp"}
-              </p>
-            </div>
+              Get directions
+            </a>
+            <p className="font-inter text-gray-400 text-xs mt-3 leading-relaxed">
+              {"We'll confirm the exact time via WhatsApp"}
+            </p>
           </div>
         </div>
       </div>

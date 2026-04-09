@@ -9,8 +9,8 @@ module.exports = {
     extend: {
       colors: {
         // ─── Change these two to adapt to any client ───
-        primary: '#8B4513',
-        cream: '#FDF6EC',
+        primary: '#000000',
+        cream: '#F5F5F5',
         // ───────────────────────────────────────────────
       },
       fontFamily: {

@@ -41,11 +41,60 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
     <div className="flex flex-col min-h-screen bg-cream">
       <StepHeader title="Your order" onBack={onBack} />
 
-      <div className="pt-4 pb-36 flex-1">
+      <div className="pt-4 pb-48 flex-1">
         {cart.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-center">
-            <span className="text-5xl mb-4">🛒</span>
-            <p className="font-inter text-gray-400 text-sm">Your cart is empty</p>
+          <div className="pb-48">
+            {/* Empty state hero */}
+            <div className="flex flex-col items-center justify-center py-12 text-center px-4">
+              <span className="text-5xl mb-4">🛒</span>
+              <p className="font-inter font-bold text-xl text-gray-900">Your cart is empty</p>
+              <p className="font-inter text-sm text-gray-400 mt-1">Add some items to get started</p>
+            </div>
+
+            {/* Suggestions section */}
+            <div className="bg-white border-t border-gray-100">
+              <p className="font-inter font-semibold text-sm text-gray-900 px-4 pt-4 pb-3">
+                You might like
+              </p>
+              <div className="flex flex-col gap-0">
+                {products.map((product, index) => (
+                  <div
+                    key={product.id}
+                    className={`px-4 py-3 flex items-center gap-3 ${index < products.length - 1 ? 'border-b border-gray-100' : ''}`}
+                  >
+                    <div className="relative h-16 w-16 flex-shrink-0 overflow-hidden rounded-xl bg-gray-100">
+                      <Image
+                        src={product.image_url}
+                        alt={product.name}
+                        fill
+                        className="object-cover"
+                        sizes="64px"
+                      />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="font-inter font-semibold text-gray-900 text-sm leading-snug truncate">
+                        {product.name}
+                      </p>
+                      <p className="font-inter text-gray-400 text-xs mt-0.5 line-clamp-1">
+                        {product.description}
+                      </p>
+                      <p className="font-inter font-bold text-gray-900 text-sm mt-1">
+                        ${product.price.toLocaleString('en-AU')}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleUpsellAdd(product)}
+                      className="w-8 h-8 flex-shrink-0 rounded-full text-white text-lg font-bold flex items-center justify-center shadow-sm active:scale-90 transition-transform"
+                      style={{ backgroundColor: config.primaryColor }}
+                      aria-label={`Add ${product.name}`}
+                    >
+                      +
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         ) : (
           <>
