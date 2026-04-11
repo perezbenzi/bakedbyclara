@@ -13,14 +13,14 @@ export function buildWhatsAppMessage(
     })
     .join('\n');
 
-  return (
-    `Hi ${config.businessName}! 🍪 My order:\n` +
-    `${itemLines}\n\n` +
-    `Total: $${total.toLocaleString('en-AU')}\n` +
-    `Pickup slot: ${details.slot}\n` +
-    `Name: ${details.name}\n\n` +
-    `I've completed the transfer — sending proof below 👇`
-  );
+    return (
+      `Hi ${config.businessName}! My order:\n` +
+      `${itemLines}\n\n` +
+      `Total: $${total.toLocaleString('en-AU')}\n` +
+      `Pickup slot: ${details.slot}\n` +
+      `Name: ${details.name}\n\n` +
+      `I've completed the transfer — sending proof below`
+    );
 }
 
 export function buildWhatsAppUrl(

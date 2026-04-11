@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Product } from '@/lib/types';
 import { config } from '@/lib/config';
+import { StickyFooter } from '../StickyFooter';
 
 interface ProductDetailStepProps {
   product: Product;
@@ -143,7 +144,7 @@ export function ProductDetailStep({
       </div>
 
       {/* Sticky CTA — above the bottom navbar */}
-      <div className="fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-[480px] px-4 pb-3 pt-2 bg-cream/90 backdrop-blur-sm z-20">
+      <StickyFooter>
         <button
           onClick={handleAdd}
           disabled={product.variants.length > 0 && !selectedVariant}
@@ -152,7 +153,7 @@ export function ProductDetailStep({
         >
           {added ? 'Added! ✓' : 'Add to cart'}
         </button>
-      </div>
+      </StickyFooter>
     </div>
   );
 }

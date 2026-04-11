@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { CartItem, Product } from '@/lib/types';
 import { config } from '@/lib/config';
 import { StepHeader } from '../StepHeader';
+import { StickyFooter } from '../StickyFooter';
 import { VariantSheet } from '../VariantSheet';
 
 interface CartStepProps {
@@ -214,7 +215,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
       </div>
 
       {/* Fixed footer — sits above the bottom navbar */}
-      <div className="fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white/90 backdrop-blur-sm border-t border-gray-100 px-5 py-4 z-20">
+      <StickyFooter>
         <div className="flex items-center justify-between mb-3">
           <span className="font-inter text-gray-500 text-sm">Total</span>
           <span className="font-inter font-bold text-gray-900 text-xl">
@@ -229,7 +230,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
         >
           Continue
         </button>
-      </div>
+      </StickyFooter>
 
       {/* Variant sheet for upsell products with variants */}
       {pendingProduct && (

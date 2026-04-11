@@ -27,7 +27,7 @@ export function VariantSheet({ product, onSelect, onClose }: VariantSheetProps) 
       />
 
       {/* Sheet */}
-      <div className="relative w-full max-w-[480px] bg-white rounded-t-3xl px-5 pt-5 pb-10 animate-slide-up">
+      <div className="relative w-full max-w-[480px] md:max-w-[780px] bg-white rounded-t-3xl px-5 pt-5 pb-10 animate-slide-up">
         {/* Drag handle */}
         <div className="w-10 h-1 bg-gray-200 rounded-full mx-auto mb-5" />
 

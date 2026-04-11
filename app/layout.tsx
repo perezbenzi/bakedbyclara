@@ -18,6 +18,10 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: config.businessName,
   description: config.tagline,
+  icons: {
+    icon: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({

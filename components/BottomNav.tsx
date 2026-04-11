@@ -15,7 +15,7 @@ export function BottomNav({ activeTab, cartItemCount, onNavigate }: BottomNavPro
   const inactive = '#9CA3AF'; // gray-400
 
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] h-14 bg-white border-t border-gray-100 flex items-center z-30 shadow-[0_-1px_8px_rgba(0,0,0,0.06)]">
+    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] md:max-w-[780px] h-14 bg-white border-t border-gray-100 flex items-center z-30 shadow-[0_-1px_8px_rgba(0,0,0,0.06)]">
       {/* Inicio */}
       <button
         onClick={() => onNavigate('menu')}

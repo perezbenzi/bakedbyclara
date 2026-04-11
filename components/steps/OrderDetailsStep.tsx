@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { config } from '@/lib/config';
 import { StepHeader } from '../StepHeader';
+import { StickyFooter } from '../StickyFooter';
 
 interface OrderDetailsStepProps {
   name: string;
@@ -52,7 +53,7 @@ export function OrderDetailsStep({
               if (errors.name) setErrors((p) => ({ ...p, name: false }));
             }}
             placeholder="e.g. Jane Smith"
-            className={`w-full px-4 py-3.5 rounded-xl border-2 bg-white font-inter text-gray-900 text-sm outline-none transition-colors placeholder:text-gray-300 ${
+            className={`w-full px-4 py-3.5 rounded-xl border-2 bg-white font-inter text-gray-900 text-sm focus:text-base outline-none transition-colors placeholder:text-gray-300 ${
               errors.name
                 ? 'border-red-400'
                 : 'border-transparent focus:border-primary'
@@ -115,8 +116,8 @@ export function OrderDetailsStep({
               href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(config.pickupAddress)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center py-3.5 rounded-xl text-white font-inter font-semibold text-sm shadow-sm active:scale-[0.98] transition-transform"
-              style={{ backgroundColor: config.primaryColor }}
+              className="w-full inline-flex items-center justify-center py-3.5 rounded-xl font-inter font-semibold text-sm border-2 active:scale-[0.98] transition-transform"
+              style={{ borderColor: config.primaryColor, color: config.primaryColor, backgroundColor: 'transparent' }}
             >
               Get directions
             </a>
@@ -128,7 +129,7 @@ export function OrderDetailsStep({
       </div>
 
       {/* Fixed footer — sits above the bottom navbar */}
-      <div className="fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white/90 backdrop-blur-sm border-t border-gray-100 px-5 py-4 z-20">
+      <StickyFooter>
         <button
           onClick={handleContinue}
           className="w-full py-4 rounded-full text-white font-inter font-semibold text-sm active:scale-[0.98] transition-transform"
@@ -136,7 +137,7 @@ export function OrderDetailsStep({
         >
           Continue
         </button>
-      </div>
+      </StickyFooter>
     </div>
   );
 }

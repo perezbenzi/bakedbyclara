@@ -50,14 +50,14 @@ export function MenuStep({
     : null;
 
   return (
-    <div className="flex flex-col min-h-screen bg-cream">
+    <div className="flex flex-col min-h-screen bg-creamO">
       {/* Top bar */}
       <div className="flex items-center gap-2 px-4 pt-10 pb-4">
         <div
           className="w-8 h-8 rounded-full flex items-center justify-center text-sm flex-shrink-0"
           style={{ backgroundColor: config.primaryColor }}
         >
-          🍪
+          <Image src="/icon.png" width={40} height={40} alt={config.businessName} />
         </div>
         <div>
           <h1 className="font-inter font-bold text-base text-gray-900 leading-none">
@@ -70,7 +70,7 @@ export function MenuStep({
       {/* Hero featured product */}
       <div className="px-4 mb-6">
         {isLoading || !featuredProduct ? (
-          <div className="w-full h-[220px] rounded-2xl bg-gray-200 animate-pulse" />
+          <div className="w-full h-[220px] md:h-[280px] rounded-2xl bg-gray-200 animate-pulse" />
         ) : (
           <div
             role="button"
@@ -82,7 +82,7 @@ export function MenuStep({
                 onViewProduct(featuredProduct);
               }
             }}
-            className="relative w-full h-[220px] overflow-hidden rounded-2xl cursor-pointer"
+            className="relative w-full h-[220px] md:h-[280px] overflow-hidden rounded-2xl cursor-pointer"
           >
             <Image
               src={featuredProduct.image_url}
@@ -128,7 +128,7 @@ export function MenuStep({
       </div>
 
       {/* Product grid */}
-      <div className="px-4 grid grid-cols-2 gap-3 pb-20">
+      <div className="px-4 grid grid-cols-2 md:grid-cols-3 gap-3 pb-20">
         {isLoading
           ? Array.from({ length: 6 }).map((_, i) => <ProductSkeleton key={i} />)
           : products.map((product) => {

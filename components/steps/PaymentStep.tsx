@@ -3,6 +3,7 @@
 import { CartItem, OrderDetails } from '@/lib/types';
 import { config } from '@/lib/config';
 import { StepHeader } from '../StepHeader';
+import { StickyFooter } from '../StickyFooter';
 
 interface PaymentStepProps {
   cart: CartItem[];
@@ -111,7 +112,7 @@ export function PaymentStep({
       </div>
 
       {/* Fixed footer CTA — sits above the bottom navbar */}
-      <div className="fixed bottom-14 left-1/2 -translate-x-1/2 w-full max-w-[480px] bg-white/90 backdrop-blur-sm border-t border-gray-100 px-5 py-4 z-20">
+      <StickyFooter>
         <button
           onClick={onConfirm}
           className="w-full py-4 rounded-full text-white font-inter font-semibold text-sm active:scale-[0.98] transition-transform shadow-lg"
@@ -119,7 +120,7 @@ export function PaymentStep({
         >
           {"I've paid — confirm order ✓"}
         </button>
-      </div>
+      </StickyFooter>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { config } from '@/lib/config';
 
 export function InfoStep() {
@@ -15,7 +16,7 @@ export function InfoStep() {
           className="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center text-2xl shadow-md"
           style={{ backgroundColor: config.primaryColor }}
         >
-          🍪
+          <Image src="/icon.png" width={40} height={40} alt={config.businessName} className="rounded-full" />
         </div>
         <h1 className="font-inter font-bold text-2xl text-gray-900">{config.businessName}</h1>
         <p className="font-inter text-gray-400 text-sm mt-1">{config.tagline}</p>
@@ -41,8 +42,8 @@ export function InfoStep() {
               href={mapsHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center py-3.5 rounded-xl text-white font-inter font-semibold text-sm shadow-sm active:scale-[0.98] transition-transform"
-              style={{ backgroundColor: config.primaryColor }}
+              className="w-full inline-flex items-center justify-center py-3.5 rounded-xl font-inter font-semibold text-sm border-2 active:scale-[0.98] transition-transform"
+              style={{ borderColor: config.primaryColor, color: config.primaryColor, backgroundColor: 'transparent' }}
             >
               Get directions
             </a>

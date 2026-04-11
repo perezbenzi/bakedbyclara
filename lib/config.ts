@@ -15,7 +15,7 @@ export const config = {
   primaryColor: '#000000',
   googleSheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID || 'REPLACE_WITH_SHEET_ID',
   googleApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
-  availableSlots: ['Morning (9am–12pm)', 'Afternoon (1pm–5pm)'],
+  availableSlots: ['Morning', 'Afternoon'],
 } as const;
 
 export type Config = typeof config;
