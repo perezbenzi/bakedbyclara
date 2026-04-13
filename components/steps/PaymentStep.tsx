@@ -24,7 +24,7 @@ export function PaymentStep({
   );
 
   return (
-    <div className="flex flex-col min-h-dvh bg-cream">
+    <div className="flex flex-col min-h-dvh bg-cream pb-20">
       <StepHeader title="Bank transfer" onBack={onBack} />
 
       <div className="px-4 pt-4 pb-36 flex flex-col gap-5">

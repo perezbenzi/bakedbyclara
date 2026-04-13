@@ -38,7 +38,7 @@ export function ProductDetailStep({
   };
 
   return (
-    <div className="flex flex-col min-h-dvh bg-cream">
+    <div className="flex flex-col min-h-dvh bg-cream pb-20">
       {/* Hero image */}
       <div className="relative h-[280px] w-full overflow-hidden">
         <Image
