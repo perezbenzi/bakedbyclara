@@ -22,6 +22,18 @@ export const metadata: Metadata = {
     icon: '/icon.png',
     apple: '/icon.png',
   },
+  openGraph: {
+    title: config.businessName,
+    description: config.tagline,
+    images: [{ url: '/bakedbyclara-banner.png' }],
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: config.businessName,
+    description: config.tagline,
+    images: ['/bakedbyclara-banner.png'],
+  },
 };
 
 export default function RootLayout({
