@@ -9,12 +9,11 @@ export const config = {
   whatsappNumber: '+61410461903',
   pickupAddress: '15 Hinterland Way, Byron Bay NSW 2481',
   bankAccount: {
-    number: '01234543680',
+    number: '01234567890',
     holder: 'J. Doe',
   },
   primaryColor: '#000000',
   googleSheetId: process.env.NEXT_PUBLIC_GOOGLE_SHEET_ID || 'REPLACE_WITH_SHEET_ID',
-  googleApiKey: process.env.NEXT_PUBLIC_GOOGLE_API_KEY || '',
   availableSlots: ['Morning', 'Afternoon'],
 } as const;
 

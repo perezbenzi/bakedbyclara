@@ -1,5 +1,4 @@
 import { Product } from './types';
-import { config } from './config';
 
 // Demo products shown when Google Sheets is not configured
 const MOCK_PRODUCTS: Product[] = [
@@ -65,78 +64,23 @@ const MOCK_PRODUCTS: Product[] = [
   },
 ];
 
-function toDirectImageUrl(url: string): string {
-  const match = url.match(/\/file\/d\/([^/]+)\//);
-  if (match) {
-    return `https://drive.google.com/uc?export=view&id=${match[1]}`;
-  }
-  return url;
-}
-
 export async function fetchProducts(): Promise<Product[]> {
-  if (
-    config.googleSheetId === 'REPLACE_WITH_SHEET_ID' ||
-    !config.googleApiKey
-  ) {
-    // Return mock data for demo / local development without credentials
-    return MOCK_PRODUCTS;
-  }
-
   try {
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.googleSheetId}/values/Sheet1?key=${config.googleApiKey}`;
-    const res = await fetch(url, { cache: 'no-store' });
+    const res = await fetch('/api/products', { cache: 'no-store' });
 
     if (!res.ok) {
-      console.warn('Google Sheets fetch failed — falling back to mock data');
+      console.warn('Products API fetch failed — falling back to mock data');
       return MOCK_PRODUCTS;
     }
 
-    const data = (await res.json()) as { values: string[][] };
-    const rawRows = data.values ?? [];
-    if (rawRows.length < 2) {
-      return [];
+    const data = (await res.json()) as { products: Product[] | null };
+
+    // null means the API route has no credentials configured
+    if (data.products === null) {
+      return MOCK_PRODUCTS;
     }
 
-    const headerRow = rawRows[0] ?? [];
-    const headers = headerRow.map((h) => h.trim().toLowerCase());
-    const rows = rawRows.slice(1);
-
-    const colIndex = (keys: string[]): number => {
-      for (const key of keys) {
-        const i = headers.indexOf(key.toLowerCase());
-        if (i >= 0) return i;
-      }
-      return -1;
-    };
-
-    const getCell = (row: string[], keys: string[], fallbackIndex: number): string => {
-      const idx = colIndex(keys);
-      const i = idx >= 0 ? idx : fallbackIndex;
-      return row[i] ?? '';
-    };
-
-    return rows
-      .map((row, index) => {
-        const slugIdx = colIndex(['slug']);
-        const idIdx = colIndex(['id']);
-        let externalId = '';
-        if (slugIdx >= 0) externalId = (row[slugIdx] ?? '').trim();
-        if (!externalId && idIdx >= 0) externalId = (row[idIdx] ?? '').trim();
-        const id = externalId || `product-${index}`;
-
-        const variantsRaw = getCell(row, ['variants', 'variantes'], 3);
-
-        return {
-          id,
-          name: getCell(row, ['name', 'nombre'], 0),
-          description: getCell(row, ['description', 'descripcion'], 1),
-          price: parseFloat(getCell(row, ['price', 'precio'], 2)) || 0,
-          variants: variantsRaw ? variantsRaw.split('|').map((v) => v.trim()) : [],
-          image_url: toDirectImageUrl(getCell(row, ['image_url', 'image', 'imagen'], 4)),
-          active: getCell(row, ['active', 'activo'], 5).toLowerCase() === 'true',
-        };
-      })
-      .filter((p) => p.active);
+    return data.products;
   } catch (err) {
     console.error('Error fetching products:', err);
     return MOCK_PRODUCTS;
