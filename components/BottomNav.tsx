@@ -16,8 +16,8 @@ export function BottomNav({ activeTab, cartItemCount, onNavigate }: BottomNavPro
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] md:max-w-[780px] bg-white border-t border-gray-100 z-30 shadow-[0_-1px_8px_rgba(0,0,0,0.06)]"
-      style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+      className="fixed left-1/2 -translate-x-1/2 w-full max-w-[480px] md:max-w-[780px] bg-white border-t border-gray-100 z-30 shadow-[0_-1px_8px_rgba(0,0,0,0.06)]"
+      style={{ bottom: 'env(safe-area-inset-bottom, 0px)' }}
     >
       <div className="h-14 flex items-center">
         {/* Inicio */}
