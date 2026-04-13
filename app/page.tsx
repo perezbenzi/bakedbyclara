@@ -162,8 +162,8 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-cream flex justify-center">
-      <div className="w-full max-w-[480px] md:max-w-[780px] min-h-screen relative bg-cream">
+    <main className="min-h-dvh bg-cream flex justify-center">
+      <div className="w-full max-w-[480px] md:max-w-[780px] min-h-dvh relative bg-cream">
         {/* key= forces remount on step change, triggering the step-enter animation */}
         <div key={step} className="step-enter">
           {renderStep()}

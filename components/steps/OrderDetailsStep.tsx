@@ -36,7 +36,7 @@ export function OrderDetailsStep({
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-cream">
+    <div className="flex flex-col min-h-dvh bg-cream">
       <StepHeader title="Your details" onBack={onBack} />
 
       <div className="px-4 pt-5 pb-36 flex flex-col gap-5">

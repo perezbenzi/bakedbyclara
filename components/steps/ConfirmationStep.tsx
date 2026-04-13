@@ -26,7 +26,7 @@ export function ConfirmationStep({ cart, orderDetails, onNewOrder }: Confirmatio
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-cream pb-10">
+    <div className="flex flex-col min-h-dvh bg-cream pb-10">
       {/* Top navbar */}
       <header className="flex items-center px-4 py-3 bg-cream sticky top-0 z-10">
         <button

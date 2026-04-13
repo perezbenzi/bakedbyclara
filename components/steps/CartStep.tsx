@@ -39,7 +39,7 @@ export function CartStep({ cart, products, onUpdateQty, onAddToCart, onContinue,
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-cream">
+    <div className="flex flex-col min-h-dvh bg-cream">
       <StepHeader title="Your order" onBack={onBack} />
 
       <div className="pt-4 pb-48 flex-1">

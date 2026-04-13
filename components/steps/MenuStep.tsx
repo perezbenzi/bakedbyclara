@@ -50,7 +50,7 @@ export function MenuStep({
     : null;
 
   return (
-    <div className="flex flex-col min-h-screen bg-creamO">
+    <div className="flex flex-col min-h-dvh bg-creamO">
       {/* Top bar */}
       <div className="flex items-center gap-2 px-4 pt-10 pb-4">
         <div

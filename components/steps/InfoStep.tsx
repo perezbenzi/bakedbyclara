@@ -9,7 +9,7 @@ export function InfoStep() {
   const mapsHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(mapsQuery)}`;
 
   return (
-    <div className="flex flex-col min-h-screen bg-cream pb-20">
+    <div className="flex flex-col min-h-dvh bg-cream pb-20">
       {/* Header */}
       <div className="pt-10 pb-6 px-5 text-center">
         <div
