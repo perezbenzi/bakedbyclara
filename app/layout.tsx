@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: config.businessName,
     description: config.tagline,
-    images: [{ url: '/bakedbyclara-banner.png' }],
+    images: [{ url: 'https://bakedbyclara.vercel.app/bakedbyclara-banner.png', width: 1200, height: 630 }],
     type: 'website',
   },
   twitter: {
