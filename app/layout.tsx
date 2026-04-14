@@ -16,6 +16,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://bakedbyclara.vercel.app'),
   title: config.businessName,
   description: config.tagline,
   icons: {
@@ -32,7 +33,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: config.businessName,
     description: config.tagline,
-    images: ['/bakedbyclara-banner.png'],
+    images: ['https://bakedbyclara.vercel.app/bakedbyclara-banner.png'],
   },
 };
 
