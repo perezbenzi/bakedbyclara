@@ -1,8 +1,10 @@
-# Baked by Clara — WhatsApp Cookie Ordering Template
+# self-order-app
 
-A mobile-first ordering web app for small food businesses. Customers browse a menu, build a cart, enter pickup details, and confirm via a pre-filled WhatsApp message. No backend, no database, no auth.
+A mobile-first ordering web app template for small food businesses. Customers browse a menu, build a cart, enter pickup details, and confirm via a pre-filled WhatsApp message — no backend, no database, no auth required.
 
-## How to adapt this to a new client
+Built to be adapted by any entrepreneur with a small food business: cookie shops, empanada vendors, bakeries, meal prep services, and more.
+
+## How to adapt this to your business
 
 ### 1. Edit `lib/config.ts`
 
